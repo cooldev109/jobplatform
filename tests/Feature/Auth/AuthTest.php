@@ -136,12 +136,12 @@ class AuthTest extends TestCase
         $user = User::factory()->create();
         $token = $user->createToken('test')->plainTextToken;
 
+        $this->assertDatabaseCount('personal_access_tokens', 1);
+
         $this->withHeader('Authorization', "Bearer $token")
             ->postJson('/api/logout')
             ->assertOk();
 
-        $this->withHeader('Authorization', "Bearer $token")
-            ->getJson('/api/me')
-            ->assertUnauthorized();
+        $this->assertDatabaseCount('personal_access_tokens', 0);
     }
 }
