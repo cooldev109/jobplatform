@@ -4,7 +4,9 @@ namespace App\Domains\Auth\Services;
 
 use App\Domains\Users\Models\User;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Laravel\Sanctum\PersonalAccessToken;
 
 class AuthService
 {
@@ -35,15 +37,12 @@ class AuthService
         return ['user' => $user, 'token' => $token];
     }
 
-    public function logout(User $user): void
+    public function logout(Request $request): void
     {
-        $token = $user->currentAccessToken();
+        $bearer = $request->bearerToken();
 
-        if ($token instanceof \Laravel\Sanctum\PersonalAccessToken) {
-            $token->delete();
-            return;
+        if ($bearer) {
+            PersonalAccessToken::findToken($bearer)?->delete();
         }
-
-        $user->tokens()->delete();
     }
 }
