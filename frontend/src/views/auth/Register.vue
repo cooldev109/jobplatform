@@ -74,7 +74,6 @@ async function submit() {
           {{ $t('auth.register.password') }}
           <input v-model="form.password" type="password" autocomplete="new-password" required />
           <span v-if="errors.password" class="field-error">{{ errors.password[0] }}</span>
-          <small>{{ $t('auth.register.passwordHint') }}</small>
         </label>
 
         <label>

@@ -22,7 +22,6 @@
       "name": "Nome completo",
       "email": "E-mail",
       "password": "Senha",
-      "passwordHint": "Mínimo 8 caracteres, com letras maiúsculas, minúsculas e números.",
       "passwordConfirm": "Confirmar senha",
       "submit": "Criar conta",
       "submitting": "Criando conta…",

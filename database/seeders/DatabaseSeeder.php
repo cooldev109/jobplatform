@@ -9,14 +9,26 @@ class DatabaseSeeder extends Seeder
 {
     public function run(): void
     {
-        User::factory()->candidate()->create([
-            'name' => 'Candidato Demo',
-            'email' => 'candidato@vagasagro.test',
-        ]);
+        $accounts = [
+            ['name' => 'Candidato Demo', 'email' => 'candidato@vagasagro.test', 'type' => User::TYPE_CANDIDATE],
+            ['name' => 'Empresa Demo',   'email' => 'empresa@vagasagro.test',   'type' => User::TYPE_COMPANY_OWNER],
+        ];
 
-        User::factory()->companyOwner()->create([
-            'name' => 'Empresa Demo',
-            'email' => 'empresa@vagasagro.test',
-        ]);
+        foreach ($accounts as $acc) {
+            User::updateOrCreate(
+                ['email' => $acc['email']],
+                [
+                    'name' => $acc['name'],
+                    'password' => '123',
+                    'user_type' => $acc['type'],
+                    'email_verified_at' => now(),
+                ],
+            );
+        }
+
+        $this->command->info('Seeded test accounts (password = 123):');
+        foreach ($accounts as $acc) {
+            $this->command->info("  {$acc['type']}: {$acc['email']}");
+        }
     }
 }

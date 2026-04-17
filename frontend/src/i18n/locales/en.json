@@ -22,7 +22,6 @@
       "name": "Full name",
       "email": "Email",
       "password": "Password",
-      "passwordHint": "At least 8 characters with uppercase, lowercase, and numbers.",
       "passwordConfirm": "Confirm password",
       "submit": "Create account",
       "submitting": "Creating account…",

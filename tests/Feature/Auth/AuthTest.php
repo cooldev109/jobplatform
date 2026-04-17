@@ -58,17 +58,17 @@ class AuthTest extends TestCase
         $response->assertUnprocessable()->assertJsonValidationErrors('email');
     }
 
-    public function test_registration_rejects_weak_password(): void
+    public function test_registration_accepts_short_password(): void
     {
         $response = $this->postJson('/api/register', [
-            'name' => 'Weak',
-            'email' => 'weak@example.com',
-            'password' => 'weak',
-            'password_confirmation' => 'weak',
+            'name' => 'Short Pass',
+            'email' => 'short@example.com',
+            'password' => '123',
+            'password_confirmation' => '123',
             'user_type' => 'candidate',
         ]);
 
-        $response->assertUnprocessable()->assertJsonValidationErrors('password');
+        $response->assertCreated();
     }
 
     public function test_registration_rejects_invalid_user_type(): void
