@@ -1,10 +1,13 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { useRouter, RouterLink } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '../../stores/auth'
+import LanguageSwitcher from '../../components/LanguageSwitcher.vue'
 
 const router = useRouter()
 const auth = useAuthStore()
+const { t } = useI18n()
 
 const form = reactive({
   name: '',
@@ -26,7 +29,7 @@ async function submit() {
     router.push({ name: 'dashboard' })
   } catch (e) {
     if (e.response?.status === 422) errors.value = e.response.data.errors || {}
-    else generalError.value = 'Erro no cadastro. Tente novamente.'
+    else generalError.value = t('auth.register.genericError')
   } finally {
     submitting.value = false
   }
@@ -36,53 +39,57 @@ async function submit() {
 <template>
   <div class="auth-shell">
     <div class="auth-card">
-      <h1>Criar conta no Vagas Agro</h1>
+      <div class="auth-card__top">
+        <h1>{{ $t('auth.register.title') }}</h1>
+        <LanguageSwitcher />
+      </div>
+
       <p v-if="generalError" class="error-banner">{{ generalError }}</p>
 
       <form @submit.prevent="submit" novalidate>
-        <div class="type-picker" role="radiogroup" aria-label="Tipo de conta">
+        <div class="type-picker" role="radiogroup" :aria-label="$t('auth.register.asCandidate')">
           <label :class="{ active: form.user_type === 'candidate' }">
             <input type="radio" v-model="form.user_type" value="candidate" />
-            <span>Sou candidato</span>
+            <span>{{ $t('auth.register.asCandidate') }}</span>
           </label>
           <label :class="{ active: form.user_type === 'company_owner' }">
             <input type="radio" v-model="form.user_type" value="company_owner" />
-            <span>Sou empresa</span>
+            <span>{{ $t('auth.register.asCompany') }}</span>
           </label>
         </div>
 
         <label>
-          Nome completo
+          {{ $t('auth.register.name') }}
           <input v-model="form.name" type="text" autocomplete="name" required />
           <span v-if="errors.name" class="field-error">{{ errors.name[0] }}</span>
         </label>
 
         <label>
-          E-mail
+          {{ $t('auth.register.email') }}
           <input v-model="form.email" type="email" autocomplete="email" required />
           <span v-if="errors.email" class="field-error">{{ errors.email[0] }}</span>
         </label>
 
         <label>
-          Senha
+          {{ $t('auth.register.password') }}
           <input v-model="form.password" type="password" autocomplete="new-password" required />
           <span v-if="errors.password" class="field-error">{{ errors.password[0] }}</span>
-          <small>Mínimo 8 caracteres, com letras maiúsculas, minúsculas e números.</small>
+          <small>{{ $t('auth.register.passwordHint') }}</small>
         </label>
 
         <label>
-          Confirmar senha
+          {{ $t('auth.register.passwordConfirm') }}
           <input v-model="form.password_confirmation" type="password" autocomplete="new-password" required />
         </label>
 
         <button :disabled="submitting" type="submit">
-          {{ submitting ? 'Criando conta…' : 'Criar conta' }}
+          {{ submitting ? $t('auth.register.submitting') : $t('auth.register.submit') }}
         </button>
       </form>
 
       <p class="switch">
-        Já tem conta?
-        <RouterLink to="/login">Entrar</RouterLink>
+        {{ $t('auth.register.hasAccount') }}
+        <RouterLink to="/login">{{ $t('auth.register.loginLink') }}</RouterLink>
       </p>
     </div>
   </div>
@@ -103,9 +110,17 @@ async function submit() {
   width: 100%;
   max-width: 440px;
 }
+.auth-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
 h1 {
-  margin: 0 0 1.5rem;
+  margin: 0;
   font-size: 1.5rem;
+  line-height: 1.2;
 }
 form {
   display: grid;
@@ -155,7 +170,7 @@ input:focus {
 .type-picker input {
   display: none;
 }
-button {
+button[type='submit'] {
   padding: 0.75rem 1rem;
   background: #2563eb;
   color: #fff;
@@ -165,7 +180,7 @@ button {
   font-weight: 600;
   cursor: pointer;
 }
-button:disabled {
+button[type='submit']:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }

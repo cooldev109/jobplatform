@@ -1,0 +1,58 @@
+{
+  "common": {
+    "brand": "Vagas Agro",
+    "logout": "Log out"
+  },
+  "auth": {
+    "login": {
+      "title": "Log in to Vagas Agro",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Log in",
+      "submitting": "Logging in…",
+      "noAccount": "Don't have an account yet?",
+      "registerLink": "Sign up",
+      "invalidCredentials": "Invalid email or password.",
+      "genericError": "Authentication error. Please try again."
+    },
+    "register": {
+      "title": "Create an account on Vagas Agro",
+      "asCandidate": "I'm a candidate",
+      "asCompany": "I'm a company",
+      "name": "Full name",
+      "email": "Email",
+      "password": "Password",
+      "passwordHint": "At least 8 characters with uppercase, lowercase, and numbers.",
+      "passwordConfirm": "Confirm password",
+      "submit": "Create account",
+      "submitting": "Creating account…",
+      "hasAccount": "Already have an account?",
+      "loginLink": "Log in",
+      "genericError": "Registration error. Please try again."
+    }
+  },
+  "userType": {
+    "candidate": "Candidate",
+    "company_owner": "Company"
+  },
+  "dashboard": {
+    "greeting": "Hello, {name}",
+    "subtitle": "Welcome to the MVP. Here you'll find your data and next steps.",
+    "nextStepsTitle": "Next steps",
+    "candidate": {
+      "profile": "Complete your professional profile",
+      "browse": "Browse published jobs",
+      "apply": "Apply to jobs"
+    },
+    "company": {
+      "profile": "Create your company profile",
+      "publish": "Publish jobs",
+      "receive": "Receive applications"
+    }
+  },
+  "language": {
+    "label": "Language",
+    "pt": "Português",
+    "en": "English"
+  }
+}

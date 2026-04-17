@@ -1,0 +1,58 @@
+{
+  "common": {
+    "brand": "Vagas Agro",
+    "logout": "Sair"
+  },
+  "auth": {
+    "login": {
+      "title": "Entrar no Vagas Agro",
+      "email": "E-mail",
+      "password": "Senha",
+      "submit": "Entrar",
+      "submitting": "Entrando…",
+      "noAccount": "Ainda não tem conta?",
+      "registerLink": "Cadastre-se",
+      "invalidCredentials": "E-mail ou senha incorretos.",
+      "genericError": "Erro ao autenticar. Tente novamente."
+    },
+    "register": {
+      "title": "Criar conta no Vagas Agro",
+      "asCandidate": "Sou candidato",
+      "asCompany": "Sou empresa",
+      "name": "Nome completo",
+      "email": "E-mail",
+      "password": "Senha",
+      "passwordHint": "Mínimo 8 caracteres, com letras maiúsculas, minúsculas e números.",
+      "passwordConfirm": "Confirmar senha",
+      "submit": "Criar conta",
+      "submitting": "Criando conta…",
+      "hasAccount": "Já tem conta?",
+      "loginLink": "Entrar",
+      "genericError": "Erro no cadastro. Tente novamente."
+    }
+  },
+  "userType": {
+    "candidate": "Candidato",
+    "company_owner": "Empresa"
+  },
+  "dashboard": {
+    "greeting": "Olá, {name}",
+    "subtitle": "Bem-vindo ao MVP. Aqui você verá seus dados e próximos passos.",
+    "nextStepsTitle": "Próximos passos",
+    "candidate": {
+      "profile": "Completar perfil profissional",
+      "browse": "Explorar vagas publicadas",
+      "apply": "Candidatar-se a vagas"
+    },
+    "company": {
+      "profile": "Criar perfil da empresa",
+      "publish": "Publicar vagas",
+      "receive": "Receber candidaturas"
+    }
+  },
+  "language": {
+    "label": "Idioma",
+    "pt": "Português",
+    "en": "English"
+  }
+}

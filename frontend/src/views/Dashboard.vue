@@ -1,6 +1,8 @@
 <script setup>
+import { computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
+import LanguageSwitcher from '../components/LanguageSwitcher.vue'
 
 const auth = useAuthStore()
 const router = useRouter()
@@ -10,34 +12,37 @@ async function handleLogout() {
   router.push({ name: 'login' })
 }
 
-const typeLabel = auth.isCandidate ? 'Candidato' : 'Empresa'
+const typeKey = computed(() => auth.isCandidate ? 'userType.candidate' : 'userType.company_owner')
 </script>
 
 <template>
   <div class="dashboard">
     <header>
-      <div>
-        <strong>Vagas Agro</strong>
-        <span class="badge">{{ typeLabel }}</span>
+      <div class="brand">
+        <strong>{{ $t('common.brand') }}</strong>
+        <span class="badge">{{ $t(typeKey) }}</span>
       </div>
-      <button @click="handleLogout" class="logout">Sair</button>
+      <div class="actions">
+        <LanguageSwitcher />
+        <button @click="handleLogout" class="logout">{{ $t('common.logout') }}</button>
+      </div>
     </header>
 
     <main>
-      <h1>Olá, {{ auth.user?.name }}</h1>
-      <p class="subtitle">Bem-vindo ao MVP. Aqui você verá seus dados e próximos passos.</p>
+      <h1>{{ $t('dashboard.greeting', { name: auth.user?.name }) }}</h1>
+      <p class="subtitle">{{ $t('dashboard.subtitle') }}</p>
 
       <section class="card">
-        <h2>Próximos passos</h2>
+        <h2>{{ $t('dashboard.nextStepsTitle') }}</h2>
         <ul v-if="auth.isCandidate">
-          <li>Completar perfil profissional <em>(Sprint 2)</em></li>
-          <li>Explorar vagas publicadas <em>(Sprint 4)</em></li>
-          <li>Candidatar-se a vagas <em>(Sprint 5)</em></li>
+          <li>{{ $t('dashboard.candidate.profile') }} <em>(Sprint 2)</em></li>
+          <li>{{ $t('dashboard.candidate.browse') }} <em>(Sprint 4)</em></li>
+          <li>{{ $t('dashboard.candidate.apply') }} <em>(Sprint 5)</em></li>
         </ul>
         <ul v-else>
-          <li>Criar perfil da empresa <em>(Sprint 2)</em></li>
-          <li>Publicar vagas <em>(Sprint 3)</em></li>
-          <li>Receber candidaturas <em>(Sprint 6)</em></li>
+          <li>{{ $t('dashboard.company.profile') }} <em>(Sprint 2)</em></li>
+          <li>{{ $t('dashboard.company.publish') }} <em>(Sprint 3)</em></li>
+          <li>{{ $t('dashboard.company.receive') }} <em>(Sprint 6)</em></li>
         </ul>
       </section>
     </main>
@@ -55,6 +60,12 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.brand {
+  display: flex;
+  align-items: center;
 }
 .badge {
   margin-left: 0.75rem;
@@ -64,6 +75,11 @@ header {
   border-radius: 999px;
   font-size: 0.75rem;
   font-weight: 600;
+}
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 .logout {
   background: transparent;

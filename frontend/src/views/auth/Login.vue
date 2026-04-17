@@ -1,10 +1,13 @@
 <script setup>
 import { reactive, ref } from 'vue'
 import { useRouter, RouterLink } from 'vue-router'
+import { useI18n } from 'vue-i18n'
 import { useAuthStore } from '../../stores/auth'
+import LanguageSwitcher from '../../components/LanguageSwitcher.vue'
 
 const router = useRouter()
 const auth = useAuthStore()
+const { t } = useI18n()
 
 const form = reactive({ email: '', password: '' })
 const errors = ref({})
@@ -20,8 +23,8 @@ async function submit() {
     router.push({ name: 'dashboard' })
   } catch (e) {
     if (e.response?.status === 422) errors.value = e.response.data.errors || {}
-    else if (e.response?.status === 401) generalError.value = 'E-mail ou senha incorretos.'
-    else generalError.value = 'Erro ao autenticar. Tente novamente.'
+    else if (e.response?.status === 401) generalError.value = t('auth.login.invalidCredentials')
+    else generalError.value = t('auth.login.genericError')
   } finally {
     submitting.value = false
   }
@@ -31,30 +34,34 @@ async function submit() {
 <template>
   <div class="auth-shell">
     <div class="auth-card">
-      <h1>Entrar no Vagas Agro</h1>
+      <div class="auth-card__top">
+        <h1>{{ $t('auth.login.title') }}</h1>
+        <LanguageSwitcher />
+      </div>
+
       <p v-if="generalError" class="error-banner">{{ generalError }}</p>
 
       <form @submit.prevent="submit" novalidate>
         <label>
-          E-mail
+          {{ $t('auth.login.email') }}
           <input v-model="form.email" type="email" autocomplete="email" required />
           <span v-if="errors.email" class="field-error">{{ errors.email[0] }}</span>
         </label>
 
         <label>
-          Senha
+          {{ $t('auth.login.password') }}
           <input v-model="form.password" type="password" autocomplete="current-password" required />
           <span v-if="errors.password" class="field-error">{{ errors.password[0] }}</span>
         </label>
 
         <button :disabled="submitting" type="submit">
-          {{ submitting ? 'Entrando…' : 'Entrar' }}
+          {{ submitting ? $t('auth.login.submitting') : $t('auth.login.submit') }}
         </button>
       </form>
 
       <p class="switch">
-        Ainda não tem conta?
-        <RouterLink to="/register">Cadastre-se</RouterLink>
+        {{ $t('auth.login.noAccount') }}
+        <RouterLink to="/register">{{ $t('auth.login.registerLink') }}</RouterLink>
       </p>
     </div>
   </div>
@@ -75,9 +82,17 @@ async function submit() {
   width: 100%;
   max-width: 400px;
 }
+.auth-card__top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
 h1 {
-  margin: 0 0 1.5rem;
+  margin: 0;
   font-size: 1.5rem;
+  line-height: 1.2;
 }
 form {
   display: grid;
@@ -99,7 +114,7 @@ input:focus {
   outline: 2px solid #2563eb;
   outline-offset: 1px;
 }
-button {
+button[type='submit'] {
   padding: 0.75rem 1rem;
   background: #2563eb;
   color: #fff;
@@ -109,7 +124,7 @@ button {
   font-weight: 600;
   cursor: pointer;
 }
-button:disabled {
+button[type='submit']:disabled {
   opacity: 0.7;
   cursor: not-allowed;
 }
