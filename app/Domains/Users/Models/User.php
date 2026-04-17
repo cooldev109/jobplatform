@@ -2,9 +2,12 @@
 
 namespace App\Domains\Users\Models;
 
+use App\Domains\Companies\Models\Company;
 use Database\Factories\UserFactory;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -47,6 +50,16 @@ class User extends Authenticatable
     public function isCompanyOwner(): bool
     {
         return $this->user_type === self::TYPE_COMPANY_OWNER;
+    }
+
+    public function candidateProfile(): HasOne
+    {
+        return $this->hasOne(CandidateProfile::class);
+    }
+
+    public function companies(): HasMany
+    {
+        return $this->hasMany(Company::class, 'owner_user_id');
     }
 
     protected static function newFactory(): UserFactory

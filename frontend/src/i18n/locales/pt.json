@@ -3,6 +3,14 @@
     "brand": "Vagas Agro",
     "tagline": "Onde o agronegócio encontra talento.",
     "logout": "Sair",
+    "save": "Salvar",
+    "saving": "Salvando…",
+    "cancel": "Cancelar",
+    "edit": "Editar",
+    "back": "Voltar",
+    "loading": "Carregando…",
+    "genericError": "Algo deu errado. Tente novamente.",
+    "savedSuccessfully": "Dados salvos com sucesso.",
     "bullets": {
       "connect": "Conectamos candidatos e empresas do agro",
       "jobs": "Milhares de oportunidades em todo o Brasil",
@@ -48,6 +56,10 @@
     "greeting": "Olá, {name}",
     "subtitle": "Bem-vindo ao MVP. Aqui você verá seus dados e próximos passos.",
     "nextStepsTitle": "Próximos passos",
+    "profileCta": "Completar perfil",
+    "companyCta": "Criar empresa",
+    "yourCompanies": "Suas empresas",
+    "noCompaniesYet": "Você ainda não cadastrou nenhuma empresa.",
     "candidate": {
       "profile": "Completar perfil profissional",
       "browse": "Explorar vagas publicadas",
@@ -58,6 +70,39 @@
       "publish": "Publicar vagas",
       "receive": "Receber candidaturas"
     }
+  },
+  "profile": {
+    "title": "Perfil profissional",
+    "subtitle": "Complete seus dados para que empresas possam te encontrar.",
+    "editTitle": "Editar perfil",
+    "fields": {
+      "nome_completo": "Nome completo",
+      "telefone": "Telefone",
+      "cidade": "Cidade",
+      "estado": "Estado",
+      "area_atuacao": "Área de atuação",
+      "descricao_breve": "Descrição breve"
+    },
+    "descriptionHint": "Conte brevemente sobre sua experiência e objetivos.",
+    "empty": "Você ainda não preencheu seu perfil."
+  },
+  "company": {
+    "createTitle": "Criar empresa",
+    "editTitle": "Editar empresa",
+    "subtitle": "Preencha os dados da sua empresa para publicar vagas.",
+    "fields": {
+      "nome_empresa": "Nome da empresa",
+      "nome_responsavel": "Nome do responsável",
+      "documento": "CNPJ ou CPF",
+      "email": "E-mail",
+      "telefone": "Telefone",
+      "cidade": "Cidade",
+      "estado": "Estado",
+      "segmento": "Segmento",
+      "descricao_curta": "Descrição curta"
+    },
+    "documentoHint": "Informe o CNPJ (14 dígitos) ou CPF (11 dígitos).",
+    "descriptionHint": "Fale brevemente sobre sua empresa."
   },
   "language": {
     "label": "Idioma",

@@ -3,6 +3,14 @@
     "brand": "Vagas Agro",
     "tagline": "Where agribusiness meets talent.",
     "logout": "Log out",
+    "save": "Save",
+    "saving": "Saving…",
+    "cancel": "Cancel",
+    "edit": "Edit",
+    "back": "Back",
+    "loading": "Loading…",
+    "genericError": "Something went wrong. Please try again.",
+    "savedSuccessfully": "Data saved successfully.",
     "bullets": {
       "connect": "Connecting agricultural talent with companies",
       "jobs": "Thousands of opportunities across Brazil",
@@ -48,6 +56,10 @@
     "greeting": "Hello, {name}",
     "subtitle": "Welcome to the MVP. Here you'll find your data and next steps.",
     "nextStepsTitle": "Next steps",
+    "profileCta": "Complete profile",
+    "companyCta": "Create company",
+    "yourCompanies": "Your companies",
+    "noCompaniesYet": "You haven't created any companies yet.",
     "candidate": {
       "profile": "Complete your professional profile",
       "browse": "Browse published jobs",
@@ -58,6 +70,39 @@
       "publish": "Publish jobs",
       "receive": "Receive applications"
     }
+  },
+  "profile": {
+    "title": "Professional profile",
+    "subtitle": "Complete your details so companies can find you.",
+    "editTitle": "Edit profile",
+    "fields": {
+      "nome_completo": "Full name",
+      "telefone": "Phone",
+      "cidade": "City",
+      "estado": "State",
+      "area_atuacao": "Field of work",
+      "descricao_breve": "Short description"
+    },
+    "descriptionHint": "Briefly share your experience and career goals.",
+    "empty": "You haven't filled in your profile yet."
+  },
+  "company": {
+    "createTitle": "Create company",
+    "editTitle": "Edit company",
+    "subtitle": "Fill in your company details to publish jobs.",
+    "fields": {
+      "nome_empresa": "Company name",
+      "nome_responsavel": "Contact person",
+      "documento": "CNPJ or CPF",
+      "email": "Email",
+      "telefone": "Phone",
+      "cidade": "City",
+      "estado": "State",
+      "segmento": "Industry",
+      "descricao_curta": "Short description"
+    },
+    "documentoHint": "Enter CNPJ (14 digits) or CPF (11 digits).",
+    "descriptionHint": "Briefly describe your company."
   },
   "language": {
     "label": "Language",

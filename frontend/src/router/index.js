@@ -26,6 +26,24 @@ const router = createRouter({
       component: () => import('../views/Dashboard.vue'),
       meta: { requiresAuth: true },
     },
+    {
+      path: '/profile',
+      name: 'candidate-profile',
+      component: () => import('../views/CandidateProfile.vue'),
+      meta: { requiresAuth: true, userType: 'candidate' },
+    },
+    {
+      path: '/companies/new',
+      name: 'company-create',
+      component: () => import('../views/CompanyForm.vue'),
+      meta: { requiresAuth: true, userType: 'company_owner' },
+    },
+    {
+      path: '/companies/:id/edit',
+      name: 'company-edit',
+      component: () => import('../views/CompanyForm.vue'),
+      meta: { requiresAuth: true, userType: 'company_owner' },
+    },
   ],
 })
 
@@ -33,6 +51,7 @@ router.beforeEach((to) => {
   const auth = useAuthStore()
   if (to.meta.requiresAuth && !auth.isAuthenticated) return { name: 'login' }
   if (to.meta.guestOnly && auth.isAuthenticated) return { name: 'dashboard' }
+  if (to.meta.userType && auth.user?.user_type !== to.meta.userType) return { name: 'dashboard' }
 })
 
 export default router
