@@ -1,9 +1,19 @@
 {
   "common": {
     "brand": "Vagas Agro",
-    "logout": "Sair"
+    "tagline": "Onde o agronegócio encontra talento.",
+    "logout": "Sair",
+    "bullets": {
+      "connect": "Conectamos candidatos e empresas do agro",
+      "jobs": "Milhares de oportunidades em todo o Brasil",
+      "grow": "Construa sua carreira no campo"
+    }
   },
   "auth": {
+    "common": {
+      "showPassword": "Mostrar senha",
+      "hidePassword": "Ocultar senha"
+    },
     "login": {
       "title": "Entrar no Vagas Agro",
       "email": "E-mail",

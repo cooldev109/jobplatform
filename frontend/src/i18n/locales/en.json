@@ -1,9 +1,19 @@
 {
   "common": {
     "brand": "Vagas Agro",
-    "logout": "Log out"
+    "tagline": "Where agribusiness meets talent.",
+    "logout": "Log out",
+    "bullets": {
+      "connect": "Connecting agricultural talent with companies",
+      "jobs": "Thousands of opportunities across Brazil",
+      "grow": "Grow your career in the field"
+    }
   },
   "auth": {
+    "common": {
+      "showPassword": "Show password",
+      "hidePassword": "Hide password"
+    },
     "login": {
       "title": "Log in to Vagas Agro",
       "email": "Email",
