@@ -39,10 +39,11 @@ class AuthService
 
     public function logout(Request $request): void
     {
-        $bearer = $request->bearerToken();
+        $request->user()?->tokens()->delete();
 
-        if ($bearer) {
-            PersonalAccessToken::findToken($bearer)?->delete();
+        if ($request->hasSession()) {
+            \Illuminate\Support\Facades\Auth::guard('web')->logout();
+            $request->session()->invalidate();
         }
     }
 }
