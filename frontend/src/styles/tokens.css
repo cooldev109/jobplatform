@@ -1,0 +1,115 @@
+:root {
+  /* Brand */
+  --brand-50:  #f0fdf4;
+  --brand-100: #dcfce7;
+  --brand-200: #bbf7d0;
+  --brand-500: #16a34a;
+  --brand-600: #15803d;
+  --brand-700: #14532d;
+
+  /* Ink (neutrals) */
+  --ink-900: #111827;
+  --ink-800: #1f2937;
+  --ink-700: #374151;
+  --ink-600: #4b5563;
+  --ink-500: #6b7280;
+  --ink-400: #9ca3af;
+  --ink-300: #d1d5db;
+  --ink-200: #e5e7eb;
+  --ink-100: #f3f4f6;
+  --ink-50:  #f8fafc;
+
+  /* Semantic */
+  --success: #16a34a;
+  --success-bg: #ecfdf5;
+  --success-border: #a7f3d0;
+
+  --danger: #ef4444;
+  --danger-bg: #fef2f2;
+  --danger-border: #fecaca;
+  --danger-text: #991b1b;
+
+  --warning: #f59e0b;
+  --warning-bg: #fffbeb;
+  --warning-border: #fcd34d;
+  --warning-text: #92400e;
+
+  --info: #2563eb;
+  --info-bg: #eff6ff;
+  --info-border: #bfdbfe;
+  --info-text: #1e40af;
+
+  /* Surfaces */
+  --surface: #ffffff;
+  --surface-alt: #f9fafb;
+  --canvas: var(--ink-50);
+
+  /* Gradients */
+  --gradient-brand: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+  --gradient-hero:  linear-gradient(160deg, #15803d 0%, #16a34a 55%, #22c55e 100%);
+
+  /* Typography */
+  --font-sans: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+  --text-xs:   0.78rem;
+  --text-sm:   0.88rem;
+  --text-base: 0.95rem;
+  --text-lg:   1.05rem;
+  --text-xl:   1.5rem;
+  --text-2xl:  2rem;
+
+  /* Spacing (4px base) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --radius-xl: 20px;
+  --radius-full: 9999px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px -4px rgba(0, 0, 0, 0.06);
+  --shadow-lg: 0 10px 30px rgba(0, 0, 0, 0.08);
+  --shadow-brand: 0 4px 12px rgba(22, 163, 74, 0.25);
+  --shadow-brand-hover: 0 6px 16px rgba(22, 163, 74, 0.32);
+
+  /* Focus ring */
+  --ring-brand:  0 0 0 4px rgba(22, 163, 74, 0.12);
+  --ring-danger: 0 0 0 4px rgba(239, 68, 68, 0.12);
+
+  /* Transitions */
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+  --t-fast: 150ms;
+  --t-mid: 200ms;
+  --t-slow: 300ms;
+}
+
+html, body {
+  margin: 0;
+  font-family: var(--font-sans);
+  color: var(--ink-900);
+  background: var(--canvas);
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+}

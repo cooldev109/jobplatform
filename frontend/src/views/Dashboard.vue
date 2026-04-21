@@ -5,6 +5,8 @@ import { useRouter } from 'vue-router'
 import { useAuthStore } from '../stores/auth'
 import api from '../lib/api'
 import AppLayout from '../layouts/AppLayout.vue'
+import Card from '../components/ui/Card.vue'
+import BaseButton from '../components/ui/BaseButton.vue'
 
 const auth = useAuthStore()
 const router = useRouter()
@@ -24,7 +26,7 @@ onMounted(async () => {
       companies.value = data.data
     }
   } catch {
-    // swallow — empty states handle it
+    /* empty states handle it */
   } finally {
     loading.value = false
   }
@@ -43,21 +45,20 @@ const profileComplete = computed(() => profile.value !== null)
     <div v-if="loading" class="loading">{{ t('common.loading') }}</div>
 
     <div v-else class="grid">
-      <!-- Candidate: profile card + next steps -->
       <template v-if="auth.isCandidate">
-        <section class="card primary-card">
-          <div class="card__head">
+        <Card highlighted>
+          <div class="card-head">
             <h2>{{ t('profile.title') }}</h2>
             <span v-if="profileComplete" class="pill pill--ok">✓</span>
           </div>
           <p v-if="!profileComplete" class="muted">{{ t('profile.empty') }}</p>
           <p v-else class="muted">{{ profile.area_atuacao }} · {{ profile.cidade }} / {{ profile.estado }}</p>
-          <button class="cta" @click="router.push({ name: 'candidate-profile' })">
+          <BaseButton @click="router.push({ name: 'candidate-profile' })">
             {{ profileComplete ? t('common.edit') : t('dashboard.profileCta') }}
-          </button>
-        </section>
+          </BaseButton>
+        </Card>
 
-        <section class="card">
+        <Card>
           <h2>{{ t('dashboard.nextStepsTitle') }}</h2>
           <ul class="steps">
             <li :class="{ done: profileComplete }">
@@ -73,17 +74,16 @@ const profileComplete = computed(() => profile.value !== null)
               {{ t('dashboard.candidate.apply') }} <em>(Sprint 5)</em>
             </li>
           </ul>
-        </section>
+        </Card>
       </template>
 
-      <!-- Company owner: companies list + next steps -->
       <template v-else>
-        <section class="card primary-card">
-          <div class="card__head">
+        <Card highlighted>
+          <div class="card-head">
             <h2>{{ t('dashboard.yourCompanies') }}</h2>
-            <button class="cta-small" @click="router.push({ name: 'company-create' })">
+            <BaseButton variant="ghost" size="sm" @click="router.push({ name: 'company-create' })">
               + {{ t('dashboard.companyCta') }}
-            </button>
+            </BaseButton>
           </div>
           <p v-if="companies.length === 0" class="muted">{{ t('dashboard.noCompaniesYet') }}</p>
           <ul v-else class="company-list">
@@ -96,12 +96,12 @@ const profileComplete = computed(() => profile.value !== null)
                 <strong>{{ c.nome_empresa }}</strong>
                 <span class="muted">{{ c.segmento }} · {{ c.cidade }}/{{ c.estado }}</span>
               </div>
-              <span class="chevron">›</span>
+              <span class="chevron" aria-hidden="true">›</span>
             </li>
           </ul>
-        </section>
+        </Card>
 
-        <section class="card">
+        <Card>
           <h2>{{ t('dashboard.nextStepsTitle') }}</h2>
           <ul class="steps">
             <li :class="{ done: companies.length > 0 }">
@@ -117,7 +117,7 @@ const profileComplete = computed(() => profile.value !== null)
               {{ t('dashboard.company.receive') }} <em>(Sprint 6)</em>
             </li>
           </ul>
-        </section>
+        </Card>
       </template>
     </div>
   </AppLayout>
@@ -125,127 +125,88 @@ const profileComplete = computed(() => profile.value !== null)
 
 <style scoped>
 .hero {
-  margin-bottom: 2rem;
+  margin-bottom: var(--space-8);
 }
 .hero h1 {
-  margin: 0 0 0.35rem;
+  margin: 0 0 var(--space-1);
   font-size: 1.75rem;
   letter-spacing: -0.01em;
-  color: #111827;
+  color: var(--ink-900);
 }
 .hero p {
   margin: 0;
-  color: #6b7280;
-  font-size: 0.98rem;
+  color: var(--ink-500);
+  font-size: var(--text-base);
 }
 .loading {
   text-align: center;
-  padding: 3rem;
-  color: #6b7280;
+  padding: var(--space-12);
+  color: var(--ink-500);
 }
 .grid {
   display: grid;
   grid-template-columns: 1.2fr 1fr;
-  gap: 1.25rem;
+  gap: var(--space-5);
 }
-.card {
-  background: #fff;
-  padding: 1.5rem;
-  border-radius: 14px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04), 0 4px 12px -4px rgba(0, 0, 0, 0.06);
-}
-.card__head {
+.card-head {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 0.5rem;
+  gap: var(--space-3);
+  margin-bottom: var(--space-2);
 }
-.card h2 {
-  margin: 0 0 0.5rem;
-  font-size: 1.05rem;
-  color: #111827;
-}
-.primary-card {
-  border: 1px solid rgba(22, 163, 74, 0.1);
+h2 {
+  margin: 0 0 var(--space-2);
+  font-size: var(--text-lg);
+  color: var(--ink-900);
 }
 .muted {
-  color: #6b7280;
-  font-size: 0.92rem;
-  margin: 0 0 1rem;
-}
-.cta {
-  display: inline-block;
-  background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
-  color: #fff;
-  border: none;
-  padding: 0.65rem 1.1rem;
-  border-radius: 10px;
-  font-weight: 600;
-  font-size: 0.9rem;
-  cursor: pointer;
-  box-shadow: 0 3px 10px rgba(22, 163, 74, 0.22);
-  transition: transform 0.1s, box-shadow 0.15s;
-}
-.cta:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 5px 14px rgba(22, 163, 74, 0.3);
-}
-.cta-small {
-  background: transparent;
-  color: #15803d;
-  border: 1px solid #16a34a;
-  padding: 0.4rem 0.85rem;
-  border-radius: 8px;
-  font-weight: 600;
-  font-size: 0.85rem;
-  cursor: pointer;
-}
-.cta-small:hover {
-  background: #f0fdf4;
+  color: var(--ink-500);
+  font-size: var(--text-sm);
+  margin: 0 0 var(--space-4);
 }
 .pill {
-  font-size: 0.72rem;
+  font-size: var(--text-xs);
   padding: 0.18rem 0.55rem;
-  border-radius: 999px;
+  border-radius: var(--radius-full);
   font-weight: 700;
 }
 .pill--ok {
-  background: #ecfdf5;
-  color: #15803d;
+  background: var(--success-bg);
+  color: var(--brand-600);
 }
 .company-list {
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 0.4rem;
+  gap: var(--space-1);
 }
 .company-list li {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0.85rem 1rem;
-  border: 1px solid #f3f4f6;
-  border-radius: 10px;
+  border: 1px solid var(--ink-100);
+  border-radius: var(--radius-md);
   cursor: pointer;
-  transition: border-color 0.15s, background 0.15s;
+  transition: border-color var(--t-fast), background var(--t-fast);
 }
 .company-list li:hover {
-  border-color: #d1fae5;
-  background: #f0fdf4;
+  border-color: var(--brand-200);
+  background: var(--brand-50);
 }
 .company-list li > div {
   display: flex;
   flex-direction: column;
-  gap: 0.15rem;
+  gap: 2px;
 }
 .company-list strong {
-  color: #111827;
-  font-size: 0.95rem;
+  color: var(--ink-900);
+  font-size: var(--text-base);
 }
 .chevron {
-  color: #9ca3af;
+  color: var(--ink-400);
   font-size: 1.3rem;
   font-weight: 300;
 }
@@ -254,35 +215,33 @@ const profileComplete = computed(() => profile.value !== null)
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 0.65rem;
+  gap: var(--space-2);
 }
 .steps li {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
-  font-size: 0.92rem;
-  color: #374151;
+  gap: var(--space-2);
+  font-size: var(--text-sm);
+  color: var(--ink-700);
 }
 .step-dot {
   width: 8px;
   height: 8px;
   border-radius: 50%;
-  background: #d1d5db;
+  background: var(--ink-300);
   flex-shrink: 0;
 }
 .steps li.done .step-dot {
-  background: #16a34a;
+  background: var(--brand-500);
 }
 .steps em {
-  color: #9ca3af;
-  font-size: 0.8rem;
+  color: var(--ink-400);
+  font-size: var(--text-xs);
   font-style: normal;
   margin-left: 0.2rem;
 }
 
 @media (max-width: 860px) {
-  .grid {
-    grid-template-columns: 1fr;
-  }
+  .grid { grid-template-columns: 1fr; }
 }
 </style>
